@@ -1,0 +1,23 @@
+{
+    "name": "mrt/mrt-crud",
+    "description": "This package will be CRUD For Your Application",
+    "license": "mrt",
+    "autoload": {
+        "psr-4": {
+            "Mrt\\MrtCrud\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "masudranatapu"
+        }
+    ],
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mrt\\MrtCrud\\Providers\\MrtCrudServiceProvider"
+            ]
+        }
+    }
+}

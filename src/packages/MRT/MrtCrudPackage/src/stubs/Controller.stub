@@ -1,0 +1,136 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\{{modelName}};
+use App\Http\Requests\{{modelName}}Request;
+use Illuminate\Support\Facades\DB;
+
+class {{modelName}}Controller extends Controller
+{
+    public function index()
+    {
+        try {
+
+            $data =  {{modelName}}::all();
+
+            return response()->json([
+                'status' => true,
+                'message' => $data,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    public function store({{modelName}}Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            $data =  {{modelName}}::create($request->all());
+
+            DB::commit();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Data Successfully Create',
+                'data' => $data,
+            ]);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    public function edit($id)
+    {
+        try {
+            $data =  {{modelName}}::find($id);
+
+            return response()->json([
+                'status' => true,
+                'data' => $data,
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    public function show($id)
+    {
+        try {
+            $data =  {{modelName}}::find($id);
+
+            return response()->json([
+                'status' => true,
+                'data' => $data,
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    public function update({{modelName}}Request $request, $id)
+    {
+        try {
+            DB::beginTransaction();
+
+            $data = {{modelName}}::find($id);
+            $data->update($request->all());
+            DB::commit();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Data Successfully Updated',
+                'data' => $data,
+            ]);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    public function destroy($id)
+    {
+        try {
+            DB::beginTransaction();
+
+            $data =  {{modelName}}::findOrFail($id);
+
+            $data->delete();
+            DB::commit();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Data Successfully Deleted',
+            ]);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+}
