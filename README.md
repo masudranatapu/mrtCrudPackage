@@ -14,7 +14,7 @@ The following This package:
 
 ```bash
     1. Install a new laravel app
-    2. Download or git clone https://github.com/masudranatapu/crud_package.git
+    2. Download this source code  or git clone https://github.com/masudranatapu/crud_package.git
 ```
 
 #### Step:2
